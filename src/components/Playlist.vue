@@ -53,6 +53,7 @@
    },
 
    created() {
+     // eslint-disable-next-line no-undef
      new QWebChannel(qt.webChannelTransport, channel => {
        window.pyobject = channel.objects.pyobject;
      });
