@@ -1,5 +1,13 @@
-# EAF NetEase Cloud Music
-This repository provides the EAF NetEase Cloud Music application for the [Emacs Application Framework](https://github.com/emacs-eaf/emacs-application-framework).
+### EAF NetEase Cloud Music
+<p align="center">
+  <img width="800" src="./screenshot.png">
+</p>
 
-# Screenshot
-![](./demo-eaf.png)
+### Load application
+
+```Elisp
+(add-to-list 'load-path "~/.emacs.d/site-lisp/eaf-netease-cloud-music/")
+(require 'eaf-netease-cloud-music)
+```
+
+NetEase Cloud Music application for the [Emacs Application Framework](https://github.com/emacs-eaf/emacs-application-framework).
