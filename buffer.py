@@ -28,8 +28,7 @@ class AppBuffer(BrowserBuffer):
         BrowserBuffer.__init__(self, buffer_id, url, arguments, False)
 
         self.backgroundColor = QColor(get_emacs_var("eaf-emacs-theme-background-color")).darker(110).name()
-        
-        self.buffer_widget.loadFinished.connect(self.init_app)
+
         self.load_index_html(__file__)
 
     def init_app(self):
