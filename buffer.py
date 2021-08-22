@@ -32,7 +32,7 @@ class AppBuffer(BrowserBuffer):
         self.load_index_html(__file__)
 
     def init_app(self):
-        self.buffer_widget.execute_js('initColor(\"{}\", \"{}\")'.format(
+        self.buffer_widget.eval_js('initColor(\"{}\", \"{}\")'.format(
             get_emacs_var("eaf-emacs-theme-background-color"),
             get_emacs_var("eaf-emacs-theme-foreground-color")
         ))
