@@ -21,21 +21,16 @@
 
 from PyQt5.QtGui import QColor
 from core.webengine import BrowserBuffer
-from core.utils import eval_in_emacs, get_emacs_var
+from core.utils import eval_in_emacs
 
 class AppBuffer(BrowserBuffer):
     def __init__(self, buffer_id, url, arguments):
         BrowserBuffer.__init__(self, buffer_id, url, arguments, False)
 
-        self.backgroundColor = QColor(get_emacs_var("eaf-emacs-theme-background-color")).darker(110).name()
+        self.backgroundColor = QColor(self.theme_background_color).darker(110).name()
 
         self.load_index_html(__file__)
 
     def init_app(self):
-        self.buffer_widget.eval_js('initColor(\"{}\", \"{}\")'.format(
-            get_emacs_var("eaf-emacs-theme-background-color"),
-            get_emacs_var("eaf-emacs-theme-foreground-color")
-        ))
-
-        # Init
+        self.buffer_widget.eval_js('initColor(\"{}\", \"{}\")'.format(self.theme_background_color, self.theme_foreground_color))
         eval_in_emacs('''eaf--netease-cloud-music-init''', [])
