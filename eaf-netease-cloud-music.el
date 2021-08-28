@@ -112,7 +112,7 @@
              (setq playlist netease-cloud-music-playlists-songs))
             (t (na-error "The pid cannot be found!")))
 
-      (eaf-call-async "execute_js_function" eaf--buffer-id
+      (eaf-call-async "eval_js_function" eaf--buffer-id
                       "change_playlist_style"
                       (json-encode
                        (if netease-cloud-music-use-local-playlist
@@ -122,7 +122,7 @@
                                netease-cloud-music-playlist-id
                                netease-cloud-music-playlists)
                               netease-cloud-music-playlists)))))
-      (eaf-call-async "execute_js_function" eaf--buffer-id
+      (eaf-call-async "eval_js_function" eaf--buffer-id
                       "set_playlist" (json-encode-array playlist)))
     (when netease-cloud-music-process
       (netease-cloud-music-kill-current-song))))
@@ -133,22 +133,22 @@
                 ("playing" "pause-circle")
                 ("paused" "play-circle")
                 (_ "play-circle"))))
-    (eaf-call-async "execute_js_function" eaf--buffer-id
+    (eaf-call-async "eval_js_function" eaf--buffer-id
                     "set_play_icon_status"
                     (json-encode icon))))
 
 (defun eaf--netease-cloud-music-init ()
   "Init the netease-cloud-music."
   (when eaf-netease-cloud-music-user+list
-    (eaf-call-async "execute_js_function" eaf--buffer-id
+    (eaf-call-async "eval_js_function" eaf--buffer-id
                     "update_user_info" (json-encode eaf-netease-cloud-music-user+list)))
   (when netease-cloud-music-playlists
-    (eaf-call-async "execute_js_function" eaf--buffer-id
+    (eaf-call-async "eval_js_function" eaf--buffer-id
                     "set_user_playlists"
                     (json-encode-array
                      (netease-cloud-music--cons-to-list
                       netease-cloud-music-playlists))))
-  (eaf-call-async "execute_js_function" eaf--buffer-id
+  (eaf-call-async "eval_js_function" eaf--buffer-id
                   "change_playlist_style"
                   (json-encode
                    (list (if netease-cloud-music-use-local-playlist
@@ -159,10 +159,10 @@
                                  netease-cloud-music-playlists)
                                 netease-cloud-music-playlists)))
                          t)))
-  (eaf-call-async "execute_js_function" eaf--buffer-id
+  (eaf-call-async "eval_js_function" eaf--buffer-id
                   "set_repeat_mode"
                   (json-encode netease-cloud-music-repeat-mode))
-  (eaf-call-async "execute_js_function" eaf--buffer-id
+  (eaf-call-async "eval_js_function" eaf--buffer-id
                   "set_panel_song_info"
                   (json-encode
                    (if netease-cloud-music-process
@@ -198,13 +198,13 @@
                            (netease-cloud-music-get-user-playlist
                             netease-cloud-music-user-id))
                      (with-current-buffer "eaf-netease-cloud-music"
-                       (eaf-call-async "execute_js_function" eaf--buffer-id
+                       (eaf-call-async "eval_js_function" eaf--buffer-id
                                        "set_user_playlists"
                                        (json-encode-array
                                         (netease-cloud-music--cons-to-list
                                          netease-cloud-music-playlists))))))))))))
 
-  (eaf-call-async "execute_js_function" eaf--buffer-id
+  (eaf-call-async "eval_js_function" eaf--buffer-id
                   "set_playlist"
                   (json-encode-array
                    (if netease-cloud-music-use-local-playlist
@@ -215,7 +215,7 @@
 (defun eaf--netease-cloud-music--update-song-style ()
   "Update song style."
   (when (string= "playing" netease-cloud-music-process-status)
-    (eaf-call-async "execute_js_function" eaf--buffer-id
+    (eaf-call-async "eval_js_function" eaf--buffer-id
                     "change_song_style" netease-cloud-music-playlist-song-index)))
 
 (defun eaf--netease-cloud-music-play-with-index ()
@@ -276,14 +276,14 @@ If Up is not non-nil, move the song up.Otherwise move it down."
   "Switch playlist by getting index."
   (interactive)
   (with-current-buffer "eaf-netease-cloud-music"
-    (eaf-call-async "execute_js_function" eaf--buffer-id
+    (eaf-call-async "eval_js_function" eaf--buffer-id
                     "set_index_style" (json-encode t))
     (let ((index (1- (read-number "Enter the playlist's index: "))))
       (eaf--netease-cloud-music-change-playlist
        (if (= index 0)
            index
          (cdr (nth (1- index) netease-cloud-music-playlists)))))
-    (eaf-call-async "execute_js_function" eaf--buffer-id
+    (eaf-call-async "eval_js_function" eaf--buffer-id
                     "set_index_style" (json-encode nil))))
 
 (defun eaf--netease-cloud-music-add-to-playlist ()
@@ -296,10 +296,10 @@ If Up is not non-nil, move the song up.Otherwise move it down."
 (defun eaf--netease-cloud-music-cancel-search ()
   "Cancel search."
   (interactive)
-  (eaf-call-async "execute_js_function" eaf--buffer-id
+  (eaf-call-async "eval_js_function" eaf--buffer-id
                   "change_playlist_mode"
                   (json-encode nil))
-  (eaf-call-async "execute_js_function" eaf--buffer-id
+  (eaf-call-async "eval_js_function" eaf--buffer-id
                   "set_playlist"
                   (json-encode-array
                    (if netease-cloud-music-use-local-playlist
