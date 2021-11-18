@@ -5,8 +5,11 @@
 
 ### Load application
 
+[Install EAF](https://github.com/emacs-eaf/emacs-application-framework#install) first, then add below code in your emacs config:
+
 ```Elisp
-(add-to-list 'load-path "~/.emacs.d/site-lisp/eaf-netease-cloud-music/")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
+(require 'eaf)
 (require 'eaf-netease-cloud-music)
 ```
 
