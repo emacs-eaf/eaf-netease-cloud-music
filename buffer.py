@@ -19,7 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt5.QtGui import QColor
+from PyQt6.QtGui import QColor
 from core.webengine import BrowserBuffer
 from core.utils import eval_in_emacs
 
