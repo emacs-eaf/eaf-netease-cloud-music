@@ -32,5 +32,5 @@ class AppBuffer(BrowserBuffer):
         self.load_index_html(__file__)
 
     def init_app(self):
-        self.buffer_widget.eval_js('initColor(\"{}\", \"{}\")'.format(self.theme_background_color, self.theme_foreground_color))
+        self.buffer_widget.eval_js_function('initColor', self.theme_background_color, self.theme_foreground_color)
         eval_in_emacs('''eaf--netease-cloud-music-init''', [])
